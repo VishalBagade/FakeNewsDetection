@@ -1,0 +1,5 @@
+pyvenv.cfg
+Scripts/
+include/
+Lib/
+.vs/
