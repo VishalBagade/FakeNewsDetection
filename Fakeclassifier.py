@@ -1,12 +1,13 @@
+#Task 1 Fake News Detection System using machine learning
+
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import PassiveAggressiveClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
 import tkinter as tk
 
-dt = pd.read_csv("C:/Users/hp/Downloads/news/news.csv")
+dt = pd.read_csv("news.csv")
 print(dt)
 x = dt['text']
 dt['class'] = dt['label'].map({'FAKE': 0, 'REAL': 1})
@@ -17,11 +18,9 @@ vectorizer = TfidfVectorizer()
 vectorizer.fit(x)
 X = vectorizer.transform(x)
 X_train, X_test, Y_train, Y_test = train_test_split(X, y, test_size=0.25, random_state=42)
-# nb = MultinomialNB()
+
 pad = PassiveAggressiveClassifier()
-# nb.fit(X_train, Y_train)
 pad.fit(X_train, Y_train)
-# result = nb.score(X_test, Y_test)
 pre = pad.predict(X_test)
 result = pad.score(X_test, Y_test)
 print(result)
